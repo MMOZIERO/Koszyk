@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+	<meta charset="utf-8">
+    <link href="metro.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="metro.js"></script>
+    <script src="pdd.js"></script>
+</head>
+<body onload="wczytaj()">
+    <div data-role="dialog" id="koszykdialog" class="padding20" data-close-button="true" data-overlay="true" data-overlay-color="op-dark" data-overlay-click-close="true">
+    <h1>Gratulacje! Dokonałeś/aś zakupu. :) </h1>
+</div>
+    
+    <div class="grid">
+    	<div class="row cells8">
+    		<div class="cell"></div>
+        <div class="cell colspan6">
+        	<ul class="h-menu" id="menu">
+    		<li><a href="#" onclick="dodanie();">Dodawanie produktu</a></li>
+            <li><a href="#" onclick="wymienTresc('wyswietlanie_produktu'); wyswietlprodukty();">Wyświetlanie produktów</a></li>	
+			
+    		<li>
+   		 </div>
+        <div class="cell"></div>
+        </div>
+    	<div class="row cells8">
+        <div class="cell" id="lewa"></div>
+        <div class="cell colspan6" id="srodek" style="">
+        <div id="dodawanie_produktu">
+		<h1>Formularz dodawania produktu</h1> 
+		<div id="succes"></div>
+        <form id="formularz"  action="javascript:sukces(this,1)" method="post" onsubmit="return walidacjaformularza(this,1);">
+            <label>Nazwa produktu:</label>
+            <div class="input-control text" id="nazwa_produktu_div1" style="width:100%;">
+            <input type="text" id="nazwa_produktu1" placeholder="Podaj nazwę produktu!">
+            </div>
+            <label>Kod produktu:</label>
+            <div class="input-control text" id="kod_produktu_div1" style="width:100%;">
+            <input type="text" id="kod_produktu1" placeholder="Podaj kod produktu!">
+            </div>
+            <label>Cena netto produktu:</label>
+            <div class="input-control text" id="cena_netto_produktu_div1" style="width:100%;">
+            <input type="text" id="cena_netto_produktu1" placeholder="Podaj cenę netto produktu!">
+            </div>
+            <label>Stawka podatku VAT:</label>
+            <div class="input-control text" id="vat_div1" style="width:100%;">
+            <input type="text" id="vat1" placeholder="Podaj stawkę podatku VAT!">
+            </div>
+            <label>Cena brutto produktu:</label>
+            <div class="input-control text" style="width:100%;">
+            <input type="text" id="cena_brutto_produktu1" disabled>
+            </div>
+            <label>Kategoria produktu:</label>
+            <div class="input-control select" style="width:100%;">
+            <select id="kategoria1">
+            <option value="Elektronika">Elektronika</option>
+            <option value="Moda">Moda</option>
+            <option value="Dom">Dom</option>
+            <option value="Dziecko">Dziecko</option>
+            <option value="Kultura">Kultura</option>
+            <option value="Sport">Sport</option>
+            <option value="Motoryzacja">Motoryzacja</option>
+            <option value="Firma">Firma</option>
+            </select>
+            </div>
+            <label>Opcja dostawy:</label></br>
+            <label class="input-control checkbox"  style="">
+            <input type="checkbox" value="Poczta Polska" name="opcja_dostawy1">
+            <span class="check"></span>
+            <span class="caption">Poczta Poska</span>
+            </label>
+            <label class="input-control checkbox"  style="">
+            <input type="checkbox"  value="Pocztex" name="opcja_dostawy1">
+            <span class="check"></span>
+            <span class="caption">Pocztex</span>
+            </label>
+            <label class="input-control checkbox"  style="">
+            <input type="checkbox"  value="DPD" name="opcja_dostawy1">
+            <span class="check"></span>
+            <span class="caption">DPD</span>
+            </label>
+            <label class="input-control checkbox"  style="">
+            <input type="checkbox" value="UPS" name="opcja_dostawy1">
+            <span class="check"></span>
+            <span class="caption">UPS</span>
+            </label>
+            <label class="input-control checkbox"  style="">
+            <input type="checkbox" value="Siódemka" name="opcja_dostawy1">
+            <span class="check"></span>
+            <span class="caption">Siódemka</span>
+            </label>
+            <label class="input-control checkbox"  style="">
+            <input type="checkbox" value="Osobiście" name="opcja_dostawy1">
+            <span class="check"></span>
+            <span class="caption">Osobiście</span>
+            </label></br>
+            <div id="ss1"></div></br>
+            <label>Ocena:</label></br>
+            <label class="input-control radio"id="ocena1">
+            <input type="radio" value="0" name="ocena1">
+            <span class="check"></span>
+            <span class="caption">0</span>
+            </label>
+            <label class="input-control radio" id="ocena1">
+            <input type="radio" value="1" name="ocena1">
+            <span class="check"></span>
+            <span class="caption">1</span>
+            </label>
+            <label class="input-control radio" id="ocena1">
+            <input type="radio" value="2" name="ocena1">
+            <span class="check"></span>
+            <span class="caption">2</span>
+            </label>
+            <label class="input-control radio" id="ocena1">
+            <input type="radio" value="3" name="ocena1">
+            <span class="check"></span>
+            <span class="caption">3</span>
+            </label>
+            <label class="input-control radio" id="ocena1">
+            <input type="radio" value="4" name="ocena1">
+            <span class="check"></span>
+            <span class="caption">4</span>
+            </label>
+            <label class="input-control radio" id="ocena1">
+            <input type="radio" value="5" name="ocena1">
+            <span class="check"></span>
+            <span class="caption">5</span>
+            </label></br>
+            <div id="xx1"></div></br>
+            <button type="submit" value="Submit" class="button success" >Dodaj produkt</button>
+            <button type="reset" value="Reset" class="button danger">Wyczyść formularz</button>
+      
+        </form>
+        </div>
+		
+		<div id="edycja_produktu" style="display: none;">
+		<h1>Formularz edycji produktu</h1> 
+		
+        <form id="formularz1"  action="javascript:sukces(this,2)" method="post" onsubmit="return walidacjaformularza(this,2);">
+            <label>Nazwa produktu:</label>
+            <div class="input-control text" id="nazwa_produktu_div2" style="width:100%;">
+            <input type="text" id="nazwa_produktu2" placeholder="Podaj nazwę produktu!">
+            </div>
+            <label>Kod produktu:</label>
+            <div class="input-control text" id="kod_produktu_div2" style="width:100%;">
+            <input type="text" id="kod_produktu2" placeholder="Podaj kod produktu!">
+            </div>
+            <label>Cena netto produktu:</label>
+            <div class="input-control text" id="cena_netto_produktu_div2" style="width:100%;">
+            <input type="text" id="cena_netto_produktu2" placeholder="Podaj cenę netto produktu!">
+            </div>
+            <label>Stawka podatku VAT:</label>
+            <div class="input-control text" id="vat_div2" style="width:100%;">
+            <input type="text" id="vat2" placeholder="Podaj stawkę podatku VAT!">
+            </div>
+            <label>Cena brutto produktu:</label>
+            <div class="input-control text" style="width:100%;">
+            <input type="text" id="cena_brutto_produktu2" disabled>
+            </div>
+            <label>Kategoria produktu:</label>
+            <div class="input-control select" style="width:100%;">
+            <select id="kategoria2">
+            <option value="Elektronika">Elektronika</option>
+            <option value="Moda">Moda</option>
+            <option value="Dom">Dom</option>
+            <option value="Dziecko">Dziecko</option>
+            <option value="Kultura">Kultura</option>
+            <option value="Sport">Sport</option>
+            <option value="Motoryzacja">Motoryzacja</option>
+            <option value="Firma">Firma</option>
+            </select>
+            </div>
+            <label>Opcja dostawy:</label></br>
+            <label class="input-control checkbox"  style="">
+            <input type="checkbox" value="Poczta Polska" name="opcja_dostawy2" id="Poczta Polska2">
+            <span class="check"></span>
+            <span class="caption">Poczta Poska</span>
+            </label>
+            <label class="input-control checkbox"  style="">
+            <input type="checkbox"  value="Pocztex" name="opcja_dostawy2" id="Pocztex2">
+            <span class="check"></span>
+            <span class="caption">Pocztex</span>
+            </label>
+            <label class="input-control checkbox"  style="">
+            <input type="checkbox"  value="DPD" name="opcja_dostawy2" id="DPD2">
+            <span class="check"></span>
+            <span class="caption">DPD</span>
+            </label>
+            <label class="input-control checkbox"  style="">
+            <input type="checkbox" value="UPS" name="opcja_dostawy2" id="UPS2">
+            <span class="check"></span>
+            <span class="caption">UPS</span>
+            </label>
+            <label class="input-control checkbox"  style="">
+            <input type="checkbox" value="Siódemka" name="opcja_dostawy2" id="Siódemka2">
+            <span class="check"></span>
+            <span class="caption">Siódemka</span>
+            </label>
+            <label class="input-control checkbox"  style="">
+            <input type="checkbox" value="Osobiście" name="opcja_dostawy2" id="Osobiście2">
+            <span class="check"></span>
+            <span class="caption">Osobiście</span>
+            </label></br>
+            <div id="ss2"></div></br>
+            <label>Ocena:</label></br>
+            <label class="input-control radio"id="ocena2">
+            <input type="radio" value="0" name="ocena2">
+            <span class="check"></span>
+            <span class="caption">0</span>
+            </label>
+            <label class="input-control radio" id="ocena2">
+            <input type="radio" value="1" name="ocena2">
+            <span class="check"></span>
+            <span class="caption">1</span>
+            </label>
+            <label class="input-control radio" id="ocena2">
+            <input type="radio" value="2" name="ocena2">
+            <span class="check"></span>
+            <span class="caption">2</span>
+            </label>
+            <label class="input-control radio" id="ocena2">
+            <input type="radio" value="3" name="ocena2">
+            <span class="check"></span>
+            <span class="caption">3</span>
+            </label>
+            <label class="input-control radio" id="ocena2">
+            <input type="radio" value="4" name="ocena2">
+            <span class="check"></span>
+            <span class="caption">4</span>
+            </label>
+            <label class="input-control radio" id="ocena2">
+            <input type="radio" value="5" name="ocena2">
+            <span class="check"></span>
+            <span class="caption">5</span>
+            </label></br>
+            <div id="xx2"></div></br>
+            <button type="submit" value="Submit" class="button success" >Zmień produkt</button>
+            <button type="reset" value="Reset" class="button danger">Wyczyść formularz</button>
+      
+        </form>
+        </div>
+		
+        <div id="wyswietlanie_produktu" style="display: none;">
+        	<h1>Wyświetlanie produktów</h1>
+<label>Sposób wyświetlania:</label><div class="input-control select"><select id="wysw" onchange="wyswietlprodukty_wybierz()"><option>Lista</option><option>Obrazki</option></select></div></br>
+
+   
+</div>
+<div id="koszyk" style="display: none;">
+            <h1>Uwaga!</h1>
+
+</div>
+        
+		</div>
+        <div class="cell" id="prawa"></div>
+
+    </div>
+</div>
+
+   
+</body>
+</html>
